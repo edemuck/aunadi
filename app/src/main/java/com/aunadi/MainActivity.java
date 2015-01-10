@@ -1,7 +1,7 @@
 package com.aunadi;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -25,6 +25,10 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,7 +55,9 @@ public class MainActivity extends ActionBarActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
+
+        private Button button;
 
         public PlaceholderFragment() {
         }
@@ -60,7 +66,17 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main_new_and_history, container, false);
+            button = (Button) rootView.findViewById(R.id.btn_new_Send);
+            button.setOnClickListener(this);
+
             return rootView;
+        }
+
+        @Override
+        public void onClick(View v) {
+            // Button Contacts
+            Intent intent = new Intent(getActivity(), GetContactActivity.class);
+            startActivity(intent);
         }
     }
 }
